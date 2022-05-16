@@ -1,6 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { RespuestaMDB } from '../interfaces/interfaces';
+
+const URL = environment.url;
+const APIKEY = environment.apiKey;
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +15,34 @@ export class MoviesService {
 
   getFeature(){
     // eslint-disable-next-line max-len
-    return this.http.get<RespuestaMDB>('https://api.themoviedb.org/3/discover/movie?primary_release_date.gte=2022-01-01&primary_release_date.lte=2022-05-20&api_key=367cb030bd2726cb8c0e78aff655aaea&language=es');
+    /* Getting the current date and then getting the last day of the month. */
+    const hoy= new Date();
+    const ultimoDia= new Date(hoy.getFullYear(),hoy.getMonth() +1 , 0).getDate();
+    const mes = hoy.getMonth() + 1 ;
+    let mesString;
+
+    if (mes < 10) {
+      mesString = '0' + mes;
+    } else {
+      mesString = mes;
+    }
+
+    const inicio = `${hoy.getFullYear()}-${mesString}-01`;
+    const final = `${hoy.getFullYear()}-${mesString}-${ultimoDia}`;
+
+    return this.executeQuery<RespuestaMDB>(`discover/movie?primary_release_date.gte=${inicio}&primary_release_date.lte=${final}`);
   }
+
+  getByPopularity(){
+    const query = 'discover/movie?sort_by=popularity.desc';
+    return this.executeQuery<RespuestaMDB>(query);
+  }
+
+  private executeQuery<T>(query: string){
+    query = URL + query;
+    query += `&api_key=${APIKEY}&language=es&include_image_language=es`;
+    return this.http.get<T>(query);
+  }
+
+
 }

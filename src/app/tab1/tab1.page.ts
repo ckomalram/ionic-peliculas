@@ -10,15 +10,22 @@ import { MoviesService } from '../services/movies.service';
 /* We're injecting the MoviesService into the constructor of the Tab1Page class */
 export class Tab1Page implements OnInit {
   peliculaRecientes: Pelicula[]=[];
+  peliculasPopulares: Pelicula[]=[];
 
   constructor(private movieService: MoviesService) {}
   ngOnInit(): void {
    this.movieService.getFeature().subscribe(
     (resp) =>  {
-      console.log('respuesta', resp);
+      // console.log('respuesta', resp);
       this.peliculaRecientes = resp.results;
-      console.log('pelicula Recientes',  this.peliculaRecientes);
+      // console.log('pelicula Recientes',  this.peliculaRecientes);
   }
+   );
+
+   this.movieService.getByPopularity().subscribe(
+     resp => {
+      this.peliculasPopulares = resp.results;
+     }
    );
   }
 
