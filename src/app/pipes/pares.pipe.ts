@@ -12,7 +12,7 @@ export class ParesPipe implements PipeTransform {
       if ( index % 2 === 0) {
         result.push(array.slice(index, index + 2));
       }
-      console.log(`indice ${index} y resultado ${result}`);
+      // console.log(`indice ${index} y resultado ${result}`);
       return result;
     }, []);
 

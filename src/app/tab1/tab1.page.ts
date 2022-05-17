@@ -22,11 +22,22 @@ export class Tab1Page implements OnInit {
   }
    );
 
-   this.movieService.getByPopularity().subscribe(
-     resp => {
-      this.peliculasPopulares = resp.results;
-     }
-   );
+  /* It's calling the getPopulares() method. */
+   this.getPopulares();
+
+  }
+
+  cargarMas(){
+    this.getPopulares();
+  }
+
+  getPopulares(){
+    this.movieService.getByPopularity().subscribe(
+      resp => {
+        const tmpArr = [...this.peliculasPopulares, ...resp.results];
+       this.peliculasPopulares= tmpArr;
+      }
+    );
   }
 
 }

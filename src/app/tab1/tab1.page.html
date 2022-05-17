@@ -27,7 +27,9 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  <app-slideshow-pares [peliculas]="peliculasPopulares">
+  <app-slideshow-pares [peliculas]="peliculasPopulares"
+    (cargarMas)="cargarMas()"
+  >
   </app-slideshow-pares>
 
 </ion-content>
