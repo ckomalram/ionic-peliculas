@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { RespuestaMDB } from '../interfaces/interfaces';
+import { MovieCredits, MovieDetail, ResponseMDB } from '../interfaces/interfaces';
 
 const URL = environment.url;
 const APIKEY = environment.apiKey;
@@ -31,18 +31,27 @@ export class MoviesService {
     const inicio = `${hoy.getFullYear()}-${mesString}-01`;
     const final = `${hoy.getFullYear()}-${mesString}-${ultimoDia}`;
 
-    return this.executeQuery<RespuestaMDB>(`discover/movie?primary_release_date.gte=${inicio}&primary_release_date.lte=${final}`);
+    return this.executeQuery<ResponseMDB>(`discover/movie?primary_release_date.gte=${inicio}&primary_release_date.lte=${final}`);
   }
 
   getByPopularity(){
     this.popularesPage++;
     const query = `discover/movie?sort_by=popularity.desc&page=${this.popularesPage}`;
-    return this.executeQuery<RespuestaMDB>(query);
+    return this.executeQuery<ResponseMDB>(query);
+  }
+
+  getMovieDetail(id: string){
+    return this.executeQuery<MovieDetail>(`movie/${id}?1=1`);
+  }
+
+  getMovieCredits(id: string){
+    return this.executeQuery<MovieCredits>(`movie/${id}/credits?1=1`);
   }
 
   private executeQuery<T>(query: string){
     query = URL + query;
     query += `&api_key=${APIKEY}&language=es&include_image_language=es`;
+    // console.log(query);
     return this.http.get<T>(query);
   }
 
