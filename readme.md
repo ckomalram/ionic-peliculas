@@ -5,6 +5,8 @@
 * [Examples API movie](https://www.themoviedb.org/documentation/api/discover)
 * [Documentation API movie](https://developers.themoviedb.org/3/getting-started/introduction)
 
+* [Data Storage](https://ionicframework.com/docs/angular/storage)
+
 # npm installs
  
 # comandos de consola utilizados

@@ -34,6 +34,10 @@ export class MoviesService {
     return this.executeQuery<ResponseMDB>(`discover/movie?primary_release_date.gte=${inicio}&primary_release_date.lte=${final}`);
   }
 
+  searchMovie(pelicula: string){
+    return this.executeQuery<ResponseMDB>(`search/movie?query=${pelicula}`);
+  }
+
   getByPopularity(){
     this.popularesPage++;
     const query = `discover/movie?sort_by=popularity.desc&page=${this.popularesPage}`;
