@@ -18,7 +18,7 @@ export class DatalocalService {
 
   async init() {
     await this.storageService.create();
-    console.log('instancia creada');
+    // console.log('instancia creada');
   }
 
   guardarPelicula(pelicula: MovieDetail) {
@@ -58,9 +58,9 @@ export class DatalocalService {
 
   async cargarFavoritos(){
     const favoritos = await this.storageService.get('peliculas');
-    console.log(favoritos);
+    // console.log(favoritos);
      this.peliculas = favoritos || [];
-     console.log(this.peliculas);
+    //  console.log(this.peliculas);
   //  .then(resp => this.peliculas = resp);
     return this.peliculas;
   }

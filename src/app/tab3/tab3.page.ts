@@ -29,16 +29,16 @@ export class Tab3Page implements OnInit {
     this.pelisPorGenero(this.generos, this.peliculas);
   }
 
-  ionViewDidEnter(){
-    console.log('did entrer');
-  }
+  // ionViewDidEnter(){
+  //   console.log('did entrer');
+  // }
 
-  ionViewWillLeave(){
-    console.log('ionViewWillLeave');
-  }
-  ionViewDidLeave(){
-    console.log('ionViewDidLeave');
-  }
+  // ionViewWillLeave(){
+  //   console.log('ionViewWillLeave');
+  // }
+  // ionViewDidLeave(){
+  //   console.log('ionViewDidLeave');
+  // }
 
   pelisPorGenero(generos: Genre[], peliculas: MovieDetail[]) {
     this.favoritoPorGenero = [];
@@ -50,6 +50,6 @@ export class Tab3Page implements OnInit {
       });
     });
 
-    console.log(this.favoritoPorGenero);
+    // console.log(this.favoritoPorGenero);
   }
 }

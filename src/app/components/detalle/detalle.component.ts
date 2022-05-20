@@ -37,7 +37,7 @@ export class DetalleComponent implements OnInit {
     });
 
     this.movieservice.getMovieCredits(this.id).subscribe((resp)=> {
-      console.log(resp);
+      //console.log(resp);
       this.actores = resp.cast;
     });
     // console.log('ID detalle', this.id);
