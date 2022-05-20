@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { MovieCredits, MovieDetail, ResponseMDB } from '../interfaces/interfaces';
+import { Genre, MovieCredits, MovieDetail, respGenres, ResponseMDB } from '../interfaces/interfaces';
 
 const URL = environment.url;
 const APIKEY = environment.apiKey;
@@ -10,7 +10,10 @@ const APIKEY = environment.apiKey;
   providedIn: 'root'
 })
 export class MoviesService {
+  generos: any[] =[];
   private popularesPage = 0;
+
+
 
   constructor(private http: HttpClient) { }
 
@@ -52,12 +55,23 @@ export class MoviesService {
     return this.executeQuery<MovieCredits>(`movie/${id}/credits?1=1`);
   }
 
+  getGenres(): Promise<Genre[]>{
+    return new Promise(resolve => {
+      this.executeQuery<respGenres>(`genre/movie/list?1=1`).subscribe(resp => {
+        this.generos = resp.genres;
+        resolve(this.generos);
+      });
+    });
+  }
+
   private executeQuery<T>(query: string){
     query = URL + query;
     query += `&api_key=${APIKEY}&language=es&include_image_language=es`;
     // console.log(query);
     return this.http.get<T>(query);
   }
+
+
 
 
 }

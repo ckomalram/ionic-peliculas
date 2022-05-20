@@ -9,7 +9,7 @@ import { MovieDetail } from '../interfaces/interfaces';
 export class DatalocalService {
 
   peliculas: MovieDetail[] = [];
-  private storage: Storage | null = null;
+  // private storage: Storage | null = null;
 
   constructor(private storageService: Storage, private toastCtrl: ToastController) {
     this.init();
@@ -17,8 +17,8 @@ export class DatalocalService {
   }
 
   async init() {
-    const storageIns = await this.storageService.create();
-    this.storage = storageIns;
+    await this.storageService.create();
+    console.log('instancia creada');
   }
 
   guardarPelicula(pelicula: MovieDetail) {
@@ -44,7 +44,7 @@ export class DatalocalService {
     }
 
     this.presentToast(mensaje);
-    this.storage.set('peliculas', this.peliculas);
+    this.storageService.set('peliculas', this.peliculas);
     return !existe;
   }
 
@@ -57,8 +57,10 @@ export class DatalocalService {
   }
 
   async cargarFavoritos(){
-    const favoritos = await this.storage.get('peliculas');
+    const favoritos = await this.storageService.get('peliculas');
+    console.log(favoritos);
      this.peliculas = favoritos || [];
+     console.log(this.peliculas);
   //  .then(resp => this.peliculas = resp);
     return this.peliculas;
   }
