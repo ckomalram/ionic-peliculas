@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MoviesService } from '../../services/movies.service';
 import { Cast, MovieDetail } from '../../interfaces/interfaces';
 import { ModalController } from '@ionic/angular';
+import { DatalocalService } from 'src/app/services/datalocal.service';
 
 @Component({
   selector: 'app-detalle',
@@ -21,7 +22,8 @@ export class DetalleComponent implements OnInit {
   };
 
   constructor(private movieservice: MoviesService,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private datalocal: DatalocalService
     ) { }
 
   ngOnInit() {
@@ -39,6 +41,10 @@ export class DetalleComponent implements OnInit {
 
   regresar(){
     this.modalCtrl.dismiss();
+  }
+
+  favorito(){
+    this.datalocal.guardarPelicula(this.pelicula);
   }
 
 }
