@@ -15,7 +15,7 @@
 * ionic serve
 * ionic serve --lab
 * ionic build
-* ionic capacitor run android -l --host=192.168.xx.xx
+* ionic capacitor run android -l --host=192.168.0.17
 * ionic capacitor add/copy android
 * ionic capacitor sync android
 * ionic g (page, module, component, service, pipe )

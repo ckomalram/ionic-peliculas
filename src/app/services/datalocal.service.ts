@@ -51,7 +51,7 @@ export class DatalocalService {
   async presentToast(mensaje: string) {
     const toast = await this.toastCtrl.create({
       message: mensaje,
-      duration: 1500
+      duration: 800
     });
     toast.present();
   }
